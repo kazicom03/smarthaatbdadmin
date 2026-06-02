@@ -1,0 +1,161 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Product inventory item details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "description": { "type": "string" },
+        "image": { "type": "string" },
+        "images": { "type": "array" },
+        "category": { "type": "string" },
+        "time": { "type": "number" }
+      },
+      "required": ["name", "price", "description", "time"]
+    },
+    "PaymentSettings": {
+      "title": "PaymentSettings",
+      "description": "Store configuration for merchant accounts and delivery options",
+      "type": "object",
+      "properties": {
+        "bkash": { "type": "string" },
+        "nagad": { "type": "string" },
+        "bank": { "type": "string" },
+        "bankName": { "type": "string" },
+        "bankAccountNumber": { "type": "string" },
+        "bankBranch": { "type": "string" },
+        "deliveryInside": { "type": "number" },
+        "deliveryOutside": { "type": "number" }
+      }
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase records and billing details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productName": { "type": "string" },
+        "productPrice": { "type": "number" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerAddress": { "type": "string" },
+        "deliveryCharge": { "type": "number" },
+        "status": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "transactionId": { "type": "string" },
+        "time": { "type": "number" }
+      },
+      "required": ["productName", "productPrice", "customerName", "customerPhone", "customerAddress", "deliveryCharge", "status", "time"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Registered user profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "role": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["uid", "name", "email", "phone", "createdAt"]
+    },
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "Real-time communication conversation session",
+      "type": "object",
+      "properties": {
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "lastMessage": { "type": "string" },
+        "lastActive": { "type": "number" },
+        "unreadByAdmin": { "type": "boolean" },
+        "unreadByCustomer": { "type": "boolean" }
+      },
+      "required": ["customerId", "customerName", "lastMessage", "lastActive", "unreadByAdmin", "unreadByCustomer"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Individual message in a chat session conversation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "text": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "senderId", "text", "timestamp"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Product review left by customers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "customerName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["productId", "productName", "customerName", "rating", "comment", "createdAt"]
+    },
+    "PromoCode": {
+      "title": "PromoCode",
+      "description": "Promotional or discount code parameters",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "type": { "type": "string", "enum": ["flat", "percentage"] },
+        "value": { "type": "number" },
+        "minPurchase": { "type": "number" },
+        "expiryDate": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["code", "type", "value", "minPurchase", "expiryDate", "active", "createdAt"]
+    }
+  },
+  "firestore": {
+    "products/{productId}": {
+      "schema": "Product",
+      "description": "Stock items sold on the site"
+    },
+    "orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer order invoices"
+    },
+    "settings/{settingId}": {
+      "schema": "PaymentSettings",
+      "description": "Merchant accounts parameters"
+    },
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles database"
+    },
+    "chat_sessions/{sessionId}": {
+      "schema": "ChatSession",
+      "description": "Real-time user chat records"
+    },
+    "chat_sessions/{sessionId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Individual message details under a session"
+    },
+    "reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Product quality reviews database"
+    },
+    "promo_codes/{codeId}": {
+      "schema": "PromoCode",
+      "description": "E-commerce coupon discount database"
+    }
+  }
+}
