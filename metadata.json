@@ -1,6 +1,0 @@
-{
-  "name": "Smarthaatbd Admin Dashboard",
-  "description": "Premium administration dashboard for Smarthaatbd with inventory upload, payment configuration, and dynamic invoice generation",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
